@@ -83,3 +83,21 @@
 
 
   
+# Запуск
+### Запуск backend
+```
+pipenv install
+pipenv shell
+cd backend/
+python manage.py migrate
+python manage.py runserver
+```
+
+### Запуск frontend
+```
+cd frontend/
+npm install
+npm run dev
+```
+
+### Переходим на страницу http://localhost:3000/
