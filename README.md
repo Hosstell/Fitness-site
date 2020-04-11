@@ -38,4 +38,4 @@
 
 
 # Схема БД
-
+![image](/database_schema.png)
