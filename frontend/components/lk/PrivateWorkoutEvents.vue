@@ -5,9 +5,8 @@
     </v-card-title>
     <v-card-text>
 
-      <v-list dense v-if="workoutEvents.length">
-        <v-list-item-group color="primary">
-
+      <v-list dense v-if="!loading">
+        <v-list-item-group color="primary" v-if="workoutEvents.length">
           <v-list-item v-for="workoutEvent in workoutEvents">
             <v-list-item-icon>
               <v-icon> mdi-dumbbell </v-icon>
@@ -22,8 +21,11 @@
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-
         </v-list-item-group>
+
+        <div v-else>
+          У Вас нет прикрепленных тренировок
+        </div>
       </v-list>
 
       <v-row v-else justify="center">
@@ -47,14 +49,17 @@
     mixins: [utilsMixin],
     data() {
       return {
+        loading: false,
         workoutEvents: []
       }
     },
     methods: {
       allWorkoutEventsOfUserRequest() {
+        this.loading = true
         requests.getAllWorkoutEventsOfUser(this.$apollo)
         .then(({data}) => {
           this.workoutEvents = data.getAllWorkoutEventsOfUser
+          this.loading = false
         })
       }
     },

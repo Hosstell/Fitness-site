@@ -31,7 +31,7 @@ const utilsMixin = {
     },
     formatMonth(date) {
       if (date) {
-        return moment(date).format('MMMM YYYY')
+        return moment(date).format('DD MMMM YYYY')
       } else {
         return ''
       }

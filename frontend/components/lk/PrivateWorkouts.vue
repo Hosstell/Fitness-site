@@ -5,8 +5,8 @@
     </v-card-title>
 
     <v-card-text>
-      <v-list dense v-if="workouts.length">
-        <v-list-item-group color="primary">
+      <v-list dense v-if="!loading">
+        <v-list-item-group color="primary" v-if="workouts.length">
           <v-list-item v-for="workout in workouts">
 
             <v-list-item-icon>
@@ -22,8 +22,11 @@
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-
         </v-list-item-group>
+
+        <div v-else>
+          У Вас нет прикрепленных тренировок
+        </div>
       </v-list>
 
       <v-row v-else justify="center">
@@ -45,15 +48,15 @@
     name: "PrivateWorkouts",
     data() {
       return {
+        loading: false,
         workouts: []
       }
     },
     methods: {
       allWorkoutOfUserRequest() {
+        this.loading = true
         requests.getWorkoutOfUser(this.$apollo)
         .then(({data}) => {
-
-
           this.workouts = []
           data.getAllWorkoutOfUser.forEach(workout => {
             workout.datetime.forEach(datetime => {
@@ -64,7 +67,7 @@
               })
             })
           })
-
+          this.loading = false
         })
       }
     },

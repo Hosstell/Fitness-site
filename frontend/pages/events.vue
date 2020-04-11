@@ -87,7 +87,7 @@
       </v-card-text>
     </v-card>
 
-    <create-events ref="createEventDialog"/>
+    <create-events ref="createEventDialog" @created="allWorkoutEventsRequest"/>
   </div>
 </template>
 
@@ -143,15 +143,6 @@
           console.log(data)
         })
       }
-    },
-    computed: {
-      // items() {
-      //   let items = _.sortBy(this.clients.items, this.pagination.sortBy)
-      //   if (this.pagination.desc.length && this.pagination.desc[0]) {
-      //     items = items.reverse()
-      //   }
-      //   return items
-      // }
     },
     mounted() {
       this.allWorkoutEventsRequest()
